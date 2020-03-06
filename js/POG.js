@@ -26,6 +26,13 @@ function display_image(img)
     elem.width = ratio * init_w;
     elem.height = ratio * init_h;
     document.getElementById("div_img").appendChild(elem);
+
+    // check to see if the image is the second card drawn, if it is then renable the draw ability
+    if(document.getElementById("div_img").childElementCount == 2)
+    {
+        document.getElementById("btn_draw").disabled = false;
+    }
+    
 }
 
 function process_card(card)
@@ -42,6 +49,7 @@ function remove_children(id)
 
 function draw()
 {
+    document.getElementById("btn_draw").disabled = true;
     // Clear the container of cards 
     remove_children("div_img");
 
@@ -50,9 +58,8 @@ function draw()
 
     // get the cards
     getJSONP(url,callback); // card 1 
-    getJSONP(url,callback); // card 2 
-
-    return 0;
+    getJSONP(url,callback); // card 2    
+    
 }
 
 function setup()
