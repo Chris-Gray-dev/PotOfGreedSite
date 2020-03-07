@@ -25,12 +25,13 @@ function display_image(img)
     elem.src = img;
     elem.width = ratio * init_w;
     elem.height = ratio * init_h;
+    
     document.getElementById("div_img").appendChild(elem);
 
     // check to see if the image is the second card drawn, if it is then renable the draw ability
     if(document.getElementById("div_img").childElementCount == 2)
     {
-        document.getElementById("btn_draw").disabled = false;
+        document.getElementById("btn_draw").addEventListener("click", draw);
     }
     
 }
@@ -49,7 +50,7 @@ function remove_children(id)
 
 function draw()
 {
-    document.getElementById("btn_draw").disabled = true;
+    document.getElementById("btn_draw").removeEventListener("click",draw);
     // Clear the container of cards 
     remove_children("div_img");
 
