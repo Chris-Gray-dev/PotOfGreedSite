@@ -10,11 +10,57 @@ body
 
 .center
 {
-    text-align: center;
     padding: 10pt;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -100%);
 }
 
 .img_holder
 {
     padding: 10pt;
+}
+
+.yg_card
+{
+    width: 310px;
+    height: 445px;
+}
+body { font-family: sans-serif; }
+
+.scene {
+  width: 310px;
+  height: 445px;
+  margin: 40px 0;
+  perspective: 600px;
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  position: relative;
+}
+
+.card.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.card__face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  line-height: 445px;
+  color: white;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+
+.card__face--back {
+  background: blue;
+  transform: rotateY(180deg);
 }

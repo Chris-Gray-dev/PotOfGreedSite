@@ -31,7 +31,7 @@ function display_image(img)
     // check to see if the image is the second card drawn, if it is then renable the draw ability
     if(document.getElementById("div_img").childElementCount == 2)
     {
-        document.getElementById("btn_draw").addEventListener("click", draw);
+        document.getElementById("crd_back").addEventListener("click",flip_back);
     }
     
 }
@@ -50,9 +50,12 @@ function remove_children(id)
 
 function draw()
 {
-    document.getElementById("btn_draw").removeEventListener("click",draw);
+    document.getElementById("crd_back").removeEventListener("click",flip_back);
+
+    document.querySelector('.card').classList.toggle('is-flipped',true);
+
     // Clear the container of cards 
-    remove_children("div_img");
+    
 
     var url = "https://db.ygoprodeck.com/api/v6/randomcard.php";
     var callback = process_card;
@@ -63,9 +66,19 @@ function draw()
     
 }
 
+function flip_back()
+{
+    remove_children("div_img");
+    console.log("back flip");
+    document.querySelector('.card').classList.toggle('is-flipped',false);
+
+}
+
 function setup()
 {
-    document.getElementById("btn_draw").addEventListener("click", draw);
+    document.getElementById("crd_front").addEventListener("click",draw);
+    document.getElementById("crd_back").addEventListener("click",flip_back);
+
 }
 
 // ""Entry Point""
