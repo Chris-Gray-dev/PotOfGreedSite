@@ -13,9 +13,13 @@ body
   width: 80%;
   margin: 0 auto;
   padding: 20px;
-  background: #f0e68c;
 }
+img
+{
+  padding-left: 200px;
+  padding-right: 200px;
 
+}
 .img_holder
 {
     padding: 10pt;
@@ -23,16 +27,16 @@ body
 
 .yg_card
 {
-    width: 310px;
-    height: 445px;
+    width: 186px;
+    height: 267px;
 }
 
 body { font-family: sans-serif; }
 
 .scene {
-  width: 310px;
-  height: 445px;
-  margin: 40px 0;
+  width: 100%;
+  height: 267px;
+  
   perspective: 600px;
   
   
@@ -59,7 +63,7 @@ body { font-family: sans-serif; }
   position: absolute;
   width: 100%;
   height: 100%;
-  line-height: 445px;
+  line-height: 356px;
   color: white;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
@@ -67,7 +71,6 @@ body { font-family: sans-serif; }
 
 
 .card__face--back {
-  background: blue;
   transform: rotateY(180deg);
 }
 

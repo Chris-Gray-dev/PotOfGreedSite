@@ -1,4 +1,4 @@
-function getJSONP(url,callback) 
+function getJSONP(url,callback,img_num) 
 {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open('GET', url, true);
@@ -9,16 +9,18 @@ function getJSONP(url,callback)
             if(xmlhttp.status == 200) 
             {
                 var obj = JSON.parse(xmlhttp.responseText);
-                callback(obj)
+                //console.log(img_num);
+                callback(obj,img_num)
             }
         }
-    };
+    }.bind(img_num);
     xmlhttp.send(null);
 }
 
-function display_image(img)
+function display_image(img,img_num)
 {
-    var ratio = 5;
+    console.log(img_num);
+    var ratio = 3;
     const init_h = 89;
     const init_w = 62;
     var elem = document.createElement("img");
@@ -36,10 +38,10 @@ function display_image(img)
     
 }
 
-function process_card(card)
+function process_card(card,img_num)
 {
     var img = card.card_images[0]["image_url"];
-    display_image(img);
+    display_image(img,img_num);
     console.log(img);
 }
 
@@ -61,8 +63,8 @@ function draw()
     var callback = process_card;
 
     // get the cards
-    getJSONP(url,callback); // card 1 
-    getJSONP(url,callback); // card 2    
+    getJSONP(url,callback,1); // card 1 
+    getJSONP(url,callback,2); // card 2    
     
 }
 
