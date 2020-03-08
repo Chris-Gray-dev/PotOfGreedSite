@@ -1,6 +1,6 @@
 body
 {
-    background-color: #0c1627;
+    background-color: rgb(1, 2, 17);
 }
 .txt_info
 {
@@ -10,11 +10,10 @@ body
 
 .center
 {
-    padding: 10pt;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -100%);
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  background: #f0e68c;
 }
 
 .img_holder
@@ -27,6 +26,7 @@ body
     width: 310px;
     height: 445px;
 }
+
 body { font-family: sans-serif; }
 
 .scene {
@@ -34,11 +34,17 @@ body { font-family: sans-serif; }
   height: 445px;
   margin: 40px 0;
   perspective: 600px;
+  
+  
+    display: block;
+    margin-left: auto;
+    margin-right: auto 
 }
 
 .card {
   width: 100%;
   height: 100%;
+  text-align: center;
   transition: transform 1s;
   transform-style: preserve-3d;
   cursor: pointer;
@@ -64,3 +70,5 @@ body { font-family: sans-serif; }
   background: blue;
   transform: rotateY(180deg);
 }
+
+
