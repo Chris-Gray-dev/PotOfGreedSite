@@ -73,7 +73,7 @@ function SoundController()
     }
 }
 
-
+var SOUND_CONTOLLER = new SoundController();
 
 
 
@@ -161,8 +161,7 @@ function rotate_card(img_num,face)
 
 function draw()
 {
-    var snd = new SoundController()
-    snd.play();
+    SOUND_CONTOLLER.play();
     
     document.getElementById("crd_back").removeEventListener("click",flip_back);
 
@@ -188,6 +187,7 @@ function flip_back()
     remove_cards();
     console.log("back flip");
     document.querySelector('.card').classList.toggle('is-flipped',false);
+    SOUND_CONTOLLER.stop();
 
 }
 
