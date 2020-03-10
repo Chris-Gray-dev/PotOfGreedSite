@@ -14,29 +14,11 @@ body
   margin: 0 auto;
   padding: 20px;
 }
-img
-{
-  padding-left: 200px;
-  padding-right: 200px;
-
-}
-.img_holder
-{
-    padding: 10pt;
-}
-
-.yg_card
-{
-    width: 186px;
-    height: 267px;
-}
 
 body { font-family: sans-serif; }
 
 .scene {
   width: 100%;
-  height: 267px;
-  
   perspective: 600px;
   
   
@@ -45,20 +27,32 @@ body { font-family: sans-serif; }
     margin-right: auto 
 }
 
-.card {
+.card,.card_1,.card_2 {
   width: 100%;
   height: 100%;
   text-align: center;
   transition: transform 1s;
   transform-style: preserve-3d;
-  cursor: pointer;
+
   position: relative;
+}
+
+.card
+{
+  cursor: pointer;
 }
 
 .card.is-flipped {
   transform: rotateY(180deg);
 }
 
+.card_1.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.card_2.is-flipped {
+  transform: rotateY(180deg);
+}
 .card__face {
   position: absolute;
   width: 100%;
@@ -74,4 +68,35 @@ body { font-family: sans-serif; }
   transform: rotateY(180deg);
 }
 
+* {
+  box-sizing: border-box;
+}
 
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 70px 0;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+img
+{
+  width: 65%;
+}
+
+/* Clearfix (clear floats) */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+  
+}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 500px) {
+  .column {
+    width: 100%;
+  }
+}

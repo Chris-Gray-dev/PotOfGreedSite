@@ -19,21 +19,27 @@ function getJSONP(url,callback,img_num)
 
 function display_image(img,img_num)
 {
-    console.log(img_num);
-    var ratio = 3;
-    const init_h = 89;
-    const init_w = 62;
-    var elem = document.createElement("img");
-    elem.src = img;
-    elem.width = ratio * init_w;
-    elem.height = ratio * init_h;
-    
-    document.getElementById("div_img").appendChild(elem);
-
-    // check to see if the image is the second card drawn, if it is then renable the draw ability
-    if(document.getElementById("div_img").childElementCount == 2)
+    var id = "crd_back_" + img_num;
+    var  holder = document.getElementById(id);
+    if (holder.childElementCount < 1)
     {
-        document.getElementById("crd_back").addEventListener("click",flip_back);
+        console.log(img_num);
+        var elem = document.createElement("img");
+        elem.src = img;   
+        holder.appendChild(elem);
+    }
+
+}
+
+function display_back(img_num)
+{
+    var id = "crd_front_" + img_num;
+    var  holder = document.getElementById(id);
+    if (holder.childElementCount < 1)
+    {
+        var elem = document.createElement("img");
+        elem.src = "./res/img/crd_back.png";   
+        holder.appendChild(elem);
     }
     
 }
@@ -42,12 +48,34 @@ function process_card(card,img_num)
 {
     var img = card.card_images[0]["image_url"];
     display_image(img,img_num);
-    console.log(img);
+    setTimeout(function()
+    {
+        console.log(img_num) 
+        rotate_card(img_num,true);
+        if(img_num == 2)
+        {
+            document.getElementById("crd_back").addEventListener("click",flip_back);
+        }
+    }.bind(img_num), 750);  
 }
 
-function remove_children(id)
+function remove_cards()
 {
-    var children = document.getElementById(id).innerHTML = '';
+    console.log("removing cards");
+    document.getElementById("crd_front_1").innerHTML = '';
+    document.getElementById("crd_back_1").innerHTML = '';
+    document.getElementById("crd_front_2").innerHTML = '';
+    document.getElementById("crd_back_2").innerHTML = '';
+
+    rotate_card(1,false);
+    rotate_card(2,false);
+}
+
+function rotate_card(img_num,face)
+{
+    var selector = ".card_" + img_num;
+    console.log(selector);
+    document.querySelector(selector).classList.toggle('is-flipped',face);
 }
 
 function draw()
@@ -64,13 +92,17 @@ function draw()
 
     // get the cards
     getJSONP(url,callback,1); // card 1 
-    getJSONP(url,callback,2); // card 2    
+    getJSONP(url,callback,2); // card 2
+    
+    display_back(1);
+    display_back(2);
     
 }
 
 function flip_back()
 {
-    remove_children("div_img");
+
+    remove_cards();
     console.log("back flip");
     document.querySelector('.card').classList.toggle('is-flipped',false);
 
