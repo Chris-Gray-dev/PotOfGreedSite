@@ -1,3 +1,82 @@
+
+function Sound(source, volume, loop)
+{
+    this.source = source;
+    this.volume = volume;
+    this.loop = loop;
+    var son;
+    this.son = son;
+    this.finish = false;
+    this.stop = function()
+    {
+        document.body.removeChild(this.son);
+    }
+    this.start = function()
+    {
+        if (this.finish) return false;
+        this.son = document.createElement("embed");
+        this.son.setAttribute("src", this.source);
+        this.son.setAttribute("hidden", "true");
+        this.son.setAttribute("volume", this.volume);
+        this.son.setAttribute("autostart", "true");
+        this.son.setAttribute("loop", this.loop);
+        document.body.appendChild(this.son);
+    }
+    this.remove = function()
+    {
+        document.body.removeChild(this.son);
+        this.finish = true;
+    }
+    this.init = function(volume, loop)
+    {
+        this.finish = false;
+        this.volume = volume;
+        this.loop = loop;
+    }
+    this.new_sound = function(sound)
+    {
+        this.source = sound;
+    }
+}
+
+function random_num(max)
+{
+    return Math.floor(Math.random()*(max))
+
+}
+function select_sound()
+{
+    const sounds = 2
+    var rnd_snd = "./res/snd/" + random_num(sounds) + ".mp3";
+    return rnd_snd;
+}
+
+function SoundController()
+{
+    this.snd = new Sound("./res/snd/0.mp3",100,false)
+    this.play = function()
+    {
+        // choose a new sound
+        var new_snd = select_sound();
+        this.snd.new_sound(new_snd);
+
+        // play new sound
+        this.snd.start();
+    }
+    this.stop = function()
+    {
+        this.snd.stop();
+    }
+    this.remove = function()
+    {
+        this.snd.remove();
+    }
+}
+
+
+
+
+
 function getJSONP(url,callback,img_num) 
 {
     var xmlhttp = new XMLHttpRequest();
@@ -44,6 +123,8 @@ function display_back(img_num)
     
 }
 
+
+
 function process_card(card,img_num)
 {
     var img = card.card_images[0]["image_url"];
@@ -80,6 +161,9 @@ function rotate_card(img_num,face)
 
 function draw()
 {
+    var snd = new SoundController()
+    snd.play();
+    
     document.getElementById("crd_back").removeEventListener("click",flip_back);
 
     document.querySelector('.card').classList.toggle('is-flipped',true);
@@ -95,8 +179,7 @@ function draw()
     getJSONP(url,callback,2); // card 2
     
     display_back(1);
-    display_back(2);
-    
+    display_back(2);    
 }
 
 function flip_back()
