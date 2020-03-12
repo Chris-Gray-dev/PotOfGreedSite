@@ -87,12 +87,14 @@ function getJSONP(url,callback,img_num)
         {
             if(xmlhttp.status == 200) 
             {
+                // Need to try to parse the object, sometimes the API returns a null value.
                 try
                 {
                     var obj = JSON.parse(xmlhttp.responseText);
                 }
                 catch(err)
                 {
+                    // If it fails to get a valid JSON, log error and try again.
                     console.log("Error reading JSON Object, fetching a new card.")
                     getJSONP(url,callback,img_num);
                 }
@@ -126,11 +128,8 @@ function display_back(img_num)
         var elem = document.createElement("img");
         elem.src = "./res/img/crd_back.png";   
         holder.appendChild(elem);
-    }
-    
+    }   
 }
-
-
 
 function process_card(card,img_num)
 {
@@ -149,20 +148,20 @@ function process_card(card,img_num)
 
 function remove_cards()
 {
-    console.log("removing cards");
+    // Clean up card 1
     document.getElementById("crd_front_1").innerHTML = '';
     document.getElementById("crd_back_1").innerHTML = '';
+    rotate_card(1,false);
+
+    // Clean up card 2
     document.getElementById("crd_front_2").innerHTML = '';
     document.getElementById("crd_back_2").innerHTML = '';
-
-    rotate_card(1,false);
     rotate_card(2,false);
 }
 
 function rotate_card(img_num,face)
 {
     var selector = ".card_" + img_num;
-    console.log(selector);
     document.querySelector(selector).classList.toggle('is-flipped',face);
 }
 
@@ -191,19 +190,15 @@ function draw()
 
 function flip_back()
 {
-
     remove_cards();
-    console.log("back flip");
     document.querySelector('.card').classList.toggle('is-flipped',false);
     SOUND_CONTOLLER.stop();
-
 }
 
 function setup()
 {
     document.getElementById("crd_front").addEventListener("click",draw);
     document.getElementById("crd_back").addEventListener("click",flip_back);
-
 }
 
 // ""Entry Point""
