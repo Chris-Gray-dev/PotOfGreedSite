@@ -97,6 +97,7 @@ function getJSONP(url,callback,img_num)
                     // If it fails to get a valid JSON, log error and try again.
                     console.log("Error reading JSON Object, fetching a new card.")
                     getJSONP(url,callback,img_num);
+                    return
                 }
                 callback(obj,img_num)
             }
