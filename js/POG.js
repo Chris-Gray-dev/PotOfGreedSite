@@ -87,8 +87,15 @@ function getJSONP(url,callback,img_num)
         {
             if(xmlhttp.status == 200) 
             {
-                var obj = JSON.parse(xmlhttp.responseText);
-                //console.log(img_num);
+                try
+                {
+                    var obj = JSON.parse(xmlhttp.responseText);
+                }
+                catch(err)
+                {
+                    console.log("Error reading JSON Object, fetching a new card.")
+                    getJSONP(url,callback,img_num);
+                }
                 callback(obj,img_num)
             }
         }
@@ -161,15 +168,15 @@ function rotate_card(img_num,face)
 
 function draw()
 {
+    // Play the starting sound
     SOUND_CONTOLLER.play();
     
+    // Disable the card from being clicked again.
     document.getElementById("crd_back").removeEventListener("click",flip_back);
 
+    // Flip the card to the front side
     document.querySelector('.card').classList.toggle('is-flipped',true);
-
-    // Clear the container of cards 
     
-
     var url = "https://db.ygoprodeck.com/api/v6/randomcard.php";
     var callback = process_card;
 
@@ -177,6 +184,7 @@ function draw()
     getJSONP(url,callback,1); // card 1 
     getJSONP(url,callback,2); // card 2
     
+    // Display the card backs
     display_back(1);
     display_back(2);    
 }
